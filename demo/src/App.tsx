@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [isLoad, setIsLoad] = useState(false)
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null)
 
   const startAudio = async (context: AudioContext) => {
@@ -16,16 +15,16 @@ function App() {
 
   const loadAudioContext = () => {
     let ctx: AudioContext
-    // if (!audioContext) {
-    // }
-    ctx = new AudioContext()
-    setAudioContext(ctx)
-    console.log("Loaded: AudioContext")
-    return ctx;
+    if (!audioContext) {
+      ctx = new AudioContext()
+      console.log("Loaded: AudioContext")
+      setAudioContext(ctx)
+      return ctx
+    }
   }
 
   useEffect(() => {
-    setIsLoad(true)
+    loadAudioContext()
   })
 
   return (
@@ -38,14 +37,12 @@ function App() {
       </p>
       <button
         onClick={async () => {
-          let ctx: AudioContext
           if (!audioContext) {
-            ctx = loadAudioContext();
-          } else {
-            ctx = audioContext
+            console.error("AudioContext does not load!")
+            return
           }
-          await startAudio(ctx);
-          ctx.resume();
+          await startAudio(audioContext);
+          audioContext.resume();
         }}
       >start audio</button>
     </main>
