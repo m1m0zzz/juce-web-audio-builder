@@ -29,12 +29,13 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - name: To demo
-        run: cd demo/
+          cache-dependency-path: 'demo/package-lock.json'
       - name: Install dependencies
         run: npm ci
+        working-directory: demo
       - name: Build
         run: npm run build
+        working-directory: demo
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
