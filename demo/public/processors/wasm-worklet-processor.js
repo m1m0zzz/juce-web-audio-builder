@@ -2,6 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// TODO: set JSDoc types
+/**
+ * @typedef { import("@types/audioworklet") }
+ */
+
 import Module from './simple-kernel.wasmmodule.js';
 import {RENDER_QUANTUM_FRAMES, MAX_CHANNEL_COUNT, FreeQueue}
   from '/lib/free-queue/free-queue.js';
@@ -30,9 +35,9 @@ class WASMWorkletProcessor extends AudioWorkletProcessor {
 
   /**
    * System-invoked process callback function.
-   * @param  {Array} inputs Incoming audio stream.
-   * @param  {Array} outputs Outgoing audio stream.
-   * @param  {Object} parameters AudioParam data.
+   * @param  {Array<Array<Float32Array>>} inputs Incoming audio stream.
+   * @param  {Array<Array<Float32Array>>} outputs Outgoing audio stream.
+   * @param  {{[key: string]: Float32Array}} parameters AudioParam data.
    * @return {Boolean} Active source flag.
    */
   process(inputs, outputs, parameters) {
