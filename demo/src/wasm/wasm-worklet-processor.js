@@ -8,8 +8,11 @@
  */
 
 import Module from './simple-kernel.wasmmodule.js';
-import {RENDER_QUANTUM_FRAMES, MAX_CHANNEL_COUNT, FreeQueue}
-  from '/lib/free-queue/free-queue.js';
+import {
+  RENDER_QUANTUM_FRAMES,
+  MAX_CHANNEL_COUNT,
+  FreeQueue
+} from '../lib/free-queue/free-queue.js';
 
 /**
  * A simple demonstration of WASM-powered AudioWorkletProcessor.
