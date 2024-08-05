@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import WASMProcessorUrl from './wasm/wasm-worklet-processor.js?url'
+import { processorURL } from './util';
+// import WASMProcessorUrl from './wasm/wasm-worklet-processor.js?url'
 
 function App() {
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null)
 
   const startAudio = async (context: AudioContext) => {
     console.log("startAudio")
-    await context.audioWorklet.addModule(WASMProcessorUrl);
+    await context.audioWorklet.addModule(processorURL('wasm-worklet-processor.js'));
     const oscillator = new OscillatorNode(context);
     const bypasser = new AudioWorkletNode(context, 'wasm-worklet-processor');
     oscillator.connect(bypasser).connect(context.destination);
